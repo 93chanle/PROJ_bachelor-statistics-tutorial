@@ -20,7 +20,7 @@
 library(tidyverse)
 library(car)
 
-rentSimple <- read.csv2("data/rentSimple.csv")
+rentSimple <- read.csv2("https://raw.githubusercontent.com/93chanle/Statistics-Tutorial-2020/master/data/rentSimple.csv")
 
 summary(rentSimple)
 
@@ -93,7 +93,7 @@ abline(h = mean(rentLM$residuals), col = "red")
 # In this part we use the full rent data. Load data:
 
 {
-rentFull <- read.csv2("data/rentFull.csv")
+rentFull <- read.csv2("https://raw.githubusercontent.com/93chanle/Statistics-Tutorial-2020/master/data/rentFull.csv")
 rentFull$petsAllowed <- factor(rentFull$petsAllowed)
 rentFull$flooringType <- factor(rentFull$flooringType)
 }
