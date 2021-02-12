@@ -1,0 +1,4 @@
+	WaldA	WaldB
+maennlich	16	23
+weiblich	20	12
+juvenil	19	10
