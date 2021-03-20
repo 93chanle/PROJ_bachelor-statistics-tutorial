@@ -14,7 +14,7 @@
 ### Chi-Squared Test - Test of independence
 
 #============================================================================#
-# #### 1. F-Test - Compare two variances ####
+#### 1. F-Test - Compare two variances ####
 #============================================================================#
 
 ### Example: Gauster-temperature
@@ -46,7 +46,7 @@ hist(PopB)
 PopA[7]<-50
 
 #============================================================================#
-# #### 2. Independent T-Test - Compare two means ####
+#### 2. Independent T-Test - Compare two means ####
 #============================================================================#
 
 ### Example: Stem diameter nesting trees
@@ -82,7 +82,7 @@ with(sleep, t.test(extra[group == 1], extra[group == 2]))
 t.test(extra ~ group, data = sleep)
 
 #============================================================================#
-# #### 3. Dependent T-Test - Compare two means ####
+#### 3. Dependent T-Test - Compare two means ####
 #============================================================================#
 
 ### Example: Weight loss after raising the younglings?
@@ -118,7 +118,7 @@ round(hvw$p.value,digits=2)
 boxplot(vorher,nachher)
 
 #============================================================================#
-# #### 4. Wilcoxon Test - Compare two medians with rank ####
+#### 4. Wilcoxon Test - Compare two medians with rank ####
 #============================================================================#
 
 ### Example: Evaluation of the Wiruwaruwolzes?
@@ -136,7 +136,7 @@ Bewertung
 wilcox.test(Finguren,Golze)
 
 #============================================================================#
-# #### 5. Chi-Squared Test - Test of independence ####
+#### 5. Chi-Squared Test - Test of independence ####
 #============================================================================#
 
 ### Example: Ratio difference within the two forests

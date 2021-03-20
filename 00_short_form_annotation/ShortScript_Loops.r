@@ -10,11 +10,10 @@
 ### FOR Loops
 ### WHILE Loops
 ### REPEAT Loops
-### Wilcoxon Test - Compare two medians with rank
-### Chi-Squared Test - Test of independence
+### Examples
 
 #============================================================================#
-# #### 1. FOR Loops ####
+#### 1. FOR Loops ####
 #============================================================================#
 
 # Loop through forward range
@@ -28,7 +27,7 @@ for (i in c(1,3,4,10)){print(i)}
 
 
 #============================================================================#
-# #### 2. WHILE Loops ####
+#### 2. WHILE Loops ####
 #============================================================================#
 
 # Set initial state
@@ -40,7 +39,7 @@ while(n < 11){
 }
 
 #============================================================================#
-# #### 3. REPEAT Loops ####
+#### 3. REPEAT Loops ####
 #============================================================================#
 
 # Set initial state
@@ -55,7 +54,7 @@ repeat{
 }
 
 #============================================================================#
-# #### 4. Examples ####
+#### 4. Examples ####
 #============================================================================#
 
 ### Example: Add 1 to a whole vector
@@ -113,7 +112,6 @@ boxplot(yield ~ N)
 boxplot(yield ~ P)
 boxplot(yield ~ K)
 
-
 for (i in 2:4){
     print(i)
     
@@ -130,30 +128,51 @@ for (i in 2:4){
 # Check result table
 result
 
-
 ### Example: Climate loop
 
 # Import and check data
 hvw1<-read.table("climate.txt",header=T)
 attach(hvw1)
-library(mgcv)
-library(climatol)
 
+# Check column names
+colnames(hvw1)
 
+# Loop through each row in data
+for (i in 1:5){
+    
+    # Extract min temperature
+    Min.t. <- as.numeric(hvw1[i,6:17])
+    
+    # Extract max temperature
+    Max.t. <- as.numeric(hvw1[i,18:29])
+    
+    # Extract prec
+    Prec<-as.numeric(hvw1[i,30:41])
+    
+    # Create data frame station
+    station<-data.frame(Prec, Min.t., Max.t., Ab.m.t. = Min.t.)
+    
+    # Transpose data frame
+    stationT <- as.data.frame(t(station))
+    
+    # Label the columns
+    names(stationT) <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+                       "Jul", "Aug", "Sep","Oct", "Nov", "Dec")
 
-        
-for (i in 1:dim(hvw1)[1]){
-Min.t.<-as.numeric(hvw1[i,6:17])
-Max.t.<-as.numeric(hvw1[i,18:29])
-Prec<-as.numeric(hvw1[i,30:41])
-station<-data.frame(Prec,Min.t.,Max.t.,Ab.m.t.=Min.t.)
-tstat<-as.data.frame(t(station))
-names(tstat)<-c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-row.names(tstat)<-names(station)
-diagwl(tstat,est=paste(hvw1$POINTNO[i],"; LON:",hvw1$LON_EX[i],"; LAT:",hvw1$LAT_EX[i]),alt=hvw1$ALT_EX[i])
-savePlot(filename=paste(hvw1$POINTNO[i]),type="jpg")
-graphics.off()
-                          }
+    # Begin saving plot
+    jpeg(filename = paste0(hvw1$POINTNO[i], ".jpg"))
+    
+    # Plot Walter & Lieth climatic diagram of the station 
+    # (requires package climatol)
+    climatol::diagwl(stationT, 
+           est = paste(hvw1$POINTNO[i],
+                              "; LON:",hvw1$LON_EX[i],
+                              "; LAT:",hvw1$LAT_EX[i]),
+           alt=hvw1$ALT_EX[i])
+    
+    # End saving plot
+    dev.off()
+}
 
 
 
